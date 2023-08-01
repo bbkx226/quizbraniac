@@ -1,6 +1,5 @@
 'use client'
 
-
 import React from 'react'
 import type { User } from 'next-auth'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
