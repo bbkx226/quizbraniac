@@ -12,7 +12,7 @@ const QuestionsList = ({ questions }: Props) => {
     let gameType = questions[0].questionType
   return (
     <Table className='mt-4'>
-        <TableCaption>End of list.</TableCaption>
+        <TableCaption>That's a Wrap! 🎉</TableCaption>
         <TableHeader>
             <TableRow>
                 <TableHead className='w-[10px]'>No.</TableHead>

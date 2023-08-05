@@ -10,7 +10,7 @@ import DetailsDialog from '@/components/DetailsDialog'
 type Props = {}
 
 export const metadata = {
-    title: 'DashBoard | QuizBraniac',
+    title: 'QuizBraniac',
 }
 
 const Dashboard = async (props: Props) => {
