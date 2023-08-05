@@ -28,7 +28,7 @@ export default function RootLayout({
         <meta property="og:site_name" content="Brandon Ban" />
         <meta property="og:title" content="QuizBraniac - AI Quizzes Generator" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/quizbraniac.png" />
+        <meta property="og:image" content="/quizbraniacbg.png" />
         <meta property="og:image:width" content="125" />
         <meta property="og:image:height" content="125" />
         <meta property="og:description" 

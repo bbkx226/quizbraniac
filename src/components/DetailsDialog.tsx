@@ -64,14 +64,14 @@ const DetailsDialog = (props: Props) => {
             <hr />
             <p className="my-2 font-semibold">
               <h4 className="text-base font-semibold">My other projects</h4>
-              <div className="grid justify-around grid-cols-4 mt-2 gap-y-3 gap-x-10">
+              <div className="grid justify-around lg:grid-cols-4 md:grid-cols-1 mt-2 gap-y-3">
                 <a href="https://shirtify-me.vercel.app/" target="_blank">
                     <div className="flex items-center gap-2">
                     <Image
                         alt="Shirtify"
                         src="/shirtify.png"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                     />
                     <span className="">Shirtify</span>
                     </div>
@@ -81,8 +81,8 @@ const DetailsDialog = (props: Props) => {
                     <Image
                         alt="Terminal Website"
                         src="/terminalportfolio.png"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                         style={{marginTop: "1rem"}}
                     />
                     <span className="">Terminal Website</span>
@@ -93,8 +93,8 @@ const DetailsDialog = (props: Props) => {
                     <Image
                         alt="AI Image Generator"
                         src="/imageaigenerator.jpg"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                         style={{marginTop: "1.5rem"}}
                     />
                     <span className="">AI Image Generator</span>
@@ -105,8 +105,8 @@ const DetailsDialog = (props: Props) => {
                     <Image
                         alt="Brancoin"
                         src="/bcstamp.png"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                     />
                     <span className="">BranCoin</span>
                     </div>
@@ -116,8 +116,8 @@ const DetailsDialog = (props: Props) => {
                     <Image
                         alt="AI-verse"
                         src="/aiverse.png"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                     />
                     <span className="">AI-verse</span>
                     </div>
@@ -127,8 +127,8 @@ const DetailsDialog = (props: Props) => {
                     <Image
                         alt="Opac1ty"
                         src="/opacity.png"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                     />
                     <span className="">Opac1ty</span>
                     </div>
@@ -138,8 +138,8 @@ const DetailsDialog = (props: Props) => {
                     <Image
                         alt="AI Summarizer"
                         src="/aisummarizer.png"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                     />
                     <span className="">AI Summarizer</span>
                     </div>
@@ -149,8 +149,8 @@ const DetailsDialog = (props: Props) => {
                     <Image
                         alt="Guzheng Chatbot"
                         src="/guzheng.jpg"
-                        width={100}
-                        height={100}
+                        width={80}
+                        height={80}
                     />
                     <span className="">Guzheng Chatbot</span>
                     </div>
