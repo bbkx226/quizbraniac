@@ -14,9 +14,9 @@ export default async function Home() {
   <div className='absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
       <Card>
         <CardHeader>
-          <CardTitle>Welcome to QuizBraniac!</CardTitle>
+          <CardTitle>Welcome to QuizBraniac, the Ultimate Quiz Adventure!</CardTitle>
           <CardDescription>
-            QuizBraniac is a quiz app that allows you to create and play quizzes.
+            Dive into the world of quizzes, where you can both <br />craft and conquer mind-boggling challenges!
           </CardDescription>
         </CardHeader>
         <CardContent>

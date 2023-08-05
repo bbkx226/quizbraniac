@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card'
-import { History } from 'lucide-react'
+import { FolderClock } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 
 type Props = {}
@@ -12,13 +12,13 @@ const HistoryCard = (props: Props) => {
     <Card className='hover:cursor-pointer hover:opacity-75' onClick={()=>router.push('/history')}>
         <CardHeader className='flex flex-row items-center justify-between pb-2 space-y-0'>
             <CardTitle className='text-2xl font-bold'>
-                History
+                Time Travel~
             </CardTitle>
-            <History size={28} strokeWidth={2.5}/>
+            <FolderClock size={28} strokeWidth={2.5}/>
         </CardHeader>
         <CardContent>
             <p className="text-sm text-muted-foreground">
-                View past quiz attempts.
+                Relive Past Quiz Triumphs and Trials with History Viewing.
             </p>
         </CardContent>
     </Card>
