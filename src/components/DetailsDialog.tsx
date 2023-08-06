@@ -18,7 +18,7 @@ const DetailsDialog = (props: Props) => {
   return (
     <Dialog>
       <DialogTrigger>
-        <span className="flex items-center px-2 py-1 text-white rounded-md bg-slate-800 animate-bounce">
+        <span className="items-center px-2 py-1 text-white rounded-md bg-slate-800 animate-bounce hidden sm:flex">
           Credits
           <Sparkles className="w-5 h-5 ml-1" />
         </span>
