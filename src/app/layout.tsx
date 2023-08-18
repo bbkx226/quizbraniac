@@ -6,18 +6,17 @@ import Navbar from '@/components/Navbar'
 import Providers from '@/components/Providers'
 import { Toaster } from '@/components/ui/toaster'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] }) // Specifies that you want to load the Inter font with only the Latin character subset.
 
+// Used for search engine optimization (SEO) and for providing context about your web page when it's shared on social media platforms
 export const metadata: Metadata = {
   title: 'QuizBraniac',
   description: 'Challenge your knowledge and have fun with QuizBraniac, the top destination for exciting quizzes and mind-boggling trivia. Get ready for an unforgettable quiz adventure!',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+// children: React.ReactNode - Render any JSX elements or components that are provided as children when using the component
+// In ReactJS with TypeScript, ReactNode is a type that represents a React element, an array of React elements, or a string, number, or boolean.
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -42,6 +41,7 @@ export default function RootLayout({
         <meta property="og:locale:alternate" content="fr_FR" />
         <meta property="og:locale:alternate" content="es_ES" /> 
       </head>
+      {/* inter.className is a dynamic class name, this line of code combines these class names to create a single string that can be applied as a className to a React element. */}
       <body className={cn(inter.className, 'antialiased min-h-screen pt-16')}>
         <Providers>          
           <Navbar />

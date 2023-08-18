@@ -1,9 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@tailwind base; /* Define your base styles, which typically include element selectors, global styles, and any CSS resets.*/
+@tailwind components; /* Define your reusable UI component styles. These can include things like buttons, cards, forms, and other common UI elements.*/
+@tailwind utilities; /* Generating utility classes that apply specific styles directly to elements in your HTML */
  
-@layer base {
-  :root {
+@layer base { 
+  :root { /* pseudo-class that targets the highest-level parent element in the Document Object Model (DOM) */
+    /* the -- syntax is used to define CSS custom properties, also known as CSS variable */
+    /* HSL (Hue, Saturation, Lightness): for each percentage */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
  
@@ -69,7 +71,8 @@
 }
  
 @layer base {
-  * {
+  * { /* Universal Selector */
+    /*  @apply: apply Tailwind CSS utility classes */
     @apply border-border;
   }
   body {
