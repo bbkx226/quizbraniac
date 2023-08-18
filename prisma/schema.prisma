@@ -1,30 +1,50 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Object-Relational Mapping (ORM) tool that enables you to work with databases in a more abstract and convenient way
+// Domain-Specific Language (DSL) that describes your data model and enables you to query your database
 
+// Specifies that you want to generate a Prisma client for JavaScript
 generator client {
   provider = "prisma-client-js"
 }
- 
+
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider     = "mysql" // The database provider is MySQL
+  url          = env("DATABASE_URL") // The database connection URL is obtained
+  relationMode = "prisma" // Using Prisma's relation mode
 }
- 
+
+// @id: mark a field as the primary identifier (primary key) for the corresponding data model
+// @default(cuid()): provide a default value for a field
+// `cuid()` is a function that generates a collision-resistant unique identifier 
+// String?: the field is optional, meaning it can have a null (or "missing") value
+// @db.Text: the corresponding field should be mapped to a text-based data type in the database
+
+// @relation(fields: [userId], references: [id], onDelete: Cascade)     provides additional details about the relationship
+// - fields: [userId]      Specifies the field(s) in the current model (User) that are used to establish the relationship
+// - references: [id]      Specifies the field(s) in the related model that the relationship references
+// - onDelete: Cascade     Specifies the behavior to be applied when a record in the related model is deleted
+// Cascade indicates that when a related record is deleted, the corresponding records in the User model will also be deleted.
+
+// @@unique([provider, providerAccountId]): Define a uniqueness constraint on the combination of the provider and providerAccountId fields in the Account model. 
+// This means that the combination of values in these two fields must be unique across all records in the Account table.
+
+// @@unique([provider, providerAccountId]): Define an index on the userId field in the Account model. 
+// An index improves the speed of data retrieval operations, such as querying records based on the indexed field.
 model Account {
-  id                String  @id @default(cuid())
+  id                String  @id @default(cuid()) 
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String? @db.Text // This field can store a large text value (token) or be null.
+  access_token      String? @db.Text // This field can store a large text value (token) or be null.
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String? @db.Text // This field can store a large text value (token) or be null.
   session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade) // model relation
   
   @@unique([provider, providerAccountId])
   @@index([userId])
@@ -46,15 +66,17 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  games         Game[]
-  accounts      Account[]
-  sessions      Session[]
+  games         Game[] // An array of Game objects related to this user.
+  accounts      Account[] // An array of Account objects related to this user.
+  sessions      Session[] // An array of Session objects related to this user.
 }
 
+// enum: User-defined type that represents a set of distinct values
 enum GameType {
   mcq
   open_ended
 }
+
 model Game {
   id            String    @id @default(cuid())
   userId        String
@@ -63,7 +85,7 @@ model Game {
   timeEnded     DateTime?
   gameType      GameType
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  questions      Question[]
+  questions     Question[]
 
   @@index([userId])
 }
