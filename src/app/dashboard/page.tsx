@@ -7,31 +7,33 @@ import HotTopicsCard from '../../components/dashboard/HotTopicsCard'
 import RecentActivities from '../../components/dashboard/RecentActivities'
 import DetailsDialog from '@/components/DetailsDialog'
 
-type Props = {}
-
 export const metadata = {
     title: 'QuizBraniac',
 }
 
-const Dashboard = async (props: Props) => {
-  const session = await getAuthSession()
+const Dashboard = async () => {
+  // This code is checking for a valid user session before allowing access to a page or route
+  const session = await getAuthSession() 
   if (!session?.user) {
     return redirect('/')
   }
     return (
+      // mx-auto - Sets margin auto on left and right to horizontally center.
       <main className='p-8 mx-auto max-w-7xl'>
+          {/* vertically center children elements within a flex container */}
           <div className='flex items-center'>
-              <h2 className='mr-2 text-3xl font-bold tracking-tight'>Dashboard</h2>
-              <DetailsDialog />
+            <h2 className='mr-3 text-3xl font-bold tracking-tight'>Dashboard</h2>
+            <DetailsDialog />
           </div>
           
           <div className="grid gap-4 mt-4 md:grid-cols-2">
-              <QuizMeCard />
-              <HistoryCard />
+            <QuizMeCard />
+            <HistoryCard />
           </div>
+
           <div className="grid gap-4 mt-4 md:grid-cols-2 lg:grid-cols-7">
-              <HotTopicsCard />
-              <RecentActivities />
+            <HotTopicsCard />
+            <RecentActivities />
           </div>
       </main>
   )
