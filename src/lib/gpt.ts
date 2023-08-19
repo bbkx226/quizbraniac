@@ -1,16 +1,19 @@
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from "openai"; // Imports OpenAI Configuration and API client
 
-const configuration = new Configuration({
+const configuration = new Configuration({ // Initializes the configuration with API key
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
-interface OutputFormat {
+const openai = new OpenAIApi(configuration); // Creates the OpenAI client
+
+interface OutputFormat { // Defines the structure of the expected output from the OpenAI API call
+  // allows dynamically defining the precise JSON structure expected from the OpenAI API. 
+  // This is then used to validate the actual output matches the desired format.
   [key: string]: string | string[] | OutputFormat;
 }
 
 export async function strict_output(
-  system_prompt: string,
+  system_prompt: string, 
   user_prompt: string | string[],
   output_format: OutputFormat,
   default_category: string = "",
@@ -25,6 +28,7 @@ export async function strict_output(
     answer: string;
   }[]
 > {
+
   // if the user input is in a list, we also process the output as a list of json
   const list_input: boolean = Array.isArray(user_prompt);
   // if the output format contains dynamic elements of < or >, then add to the prompt to handle dynamic elements
@@ -35,7 +39,7 @@ export async function strict_output(
   // start off with no error message
   let error_msg: string = "";
 
-  for (let i = 0; i < num_tries; i++) {
+  for (let i = 0; i < num_tries; i++) { // Start loop to retry on failure
     let output_format_prompt: string = `\nYou are to output the following in json format: ${JSON.stringify(
       output_format
     )}. \nDo not put quotation marks or escape character \\ in the output fields.`;
@@ -54,7 +58,7 @@ export async function strict_output(
       output_format_prompt += `\nGenerate a list of json, one json for each input element.`;
     }
 
-    // Use OpenAI to get a response
+    // Make API call to OpenAI with prompt, Use OpenAI to get a response
     const response = await openai.createChatCompletion({
       temperature: temperature,
       model: model,
@@ -68,12 +72,12 @@ export async function strict_output(
     });
 
     let res: string =
-      response.data.choices[0].message?.content?.replace(/'/g, '"') ?? "";
+      response.data.choices[0].message?.content?.replace(/'/g, '"') ?? ""; // Get text response, replace quotes with double quotes
 
     // ensure that we don't replace away apostrophes in text
     res = res.replace(/(\w)"(\w)/g, "$1'$2");
 
-    if (verbose) {
+    if (verbose) { // Log debug info if verbose
       console.log(
         "System prompt:",
         system_prompt + output_format_prompt + error_msg
@@ -83,14 +87,20 @@ export async function strict_output(
     }
 
     // try-catch block to ensure output format is adhered to
-    try {
+    try { //Try parsing response to JSON
       let output: any = JSON.parse(res);
 
       if (list_input) {
-        if (!Array.isArray(output)) {
-          throw new Error("Output format not in a list of json");
+        if (!Array.isArray(output)) { // It checks if the parsed output is an array.
+          throw new Error("Output format not in a list of json"); // If not, it throws an error that the output should be a list.
+          // This handles the case where input was a list but output wasn't.
         }
       } else {
+        // If list_input is false:
+        // It means the input was a single value.
+        // But the code is designed to handle lists.
+        // So it wraps the single output in an array.
+        // This way downstream code can assume output is always a list.
         output = [output];
       }
 
@@ -98,7 +108,7 @@ export async function strict_output(
       for (let index = 0; index < output.length; index++) {
         for (const key in output_format) {
           // unable to ensure accuracy of dynamic output header, so skip it
-          if (/<.*?>/.test(key)) {
+          if (/<.*?>/.test(key)) { // Skips keys that are dynamic (<> patterns)
             continue;
           }
 
