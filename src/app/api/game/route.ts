@@ -17,8 +17,9 @@ export async function POST(req: Request, res: Response) {
           }
         );
       }
-      const body = await req.json();
-      const { topic, type, amount } = quizCreationSchemas.parse(body);
+      
+      const body = await req.json(); // handle the request and get the JSON body
+      const { topic, type, amount } = quizCreationSchemas.parse(body); // It is destructuring the properties topic, type, and amount from the JSON body after parsing it. 
       const game = await prisma.game.create({
         data: {
           gameType: type,
@@ -27,6 +28,10 @@ export async function POST(req: Request, res: Response) {
           topic,
         },
       });
+      // It's using the topic variable passed in to the endpoint as the where condition to find an existing record.
+      // If no existing record is found, it will create a new record with the topic name and a count initialized to 1.
+      // If a record already exists, it will increment the count by 1 instead of creating a new record.
+      // This allows the topic_count table to keep a running count of quiz topics and increment the count each time a new quiz is created for that topic.
       await prisma.topic_count.upsert({
         where: {
           topic,

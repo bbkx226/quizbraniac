@@ -36,16 +36,25 @@ const loadingTexts = [
 
 const LoadingQuestions = ({ finished }: Props) => {
   const [progress, setProgress] = React.useState(0)
-  const [loadingText, setLoadingtext] = React.useState(loadingTexts[0])
+  const [loadingText, setLoadingText] = React.useState(loadingTexts[0])
   
+  // Sets an interval when the component mounts using setInterval
+  // Generates a random index to pick a loading text
+  // Sets the loadingText state to update the text
+  // Clears the interval on unmount using the return callback
   React.useEffect(() => {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * loadingTexts.length)
-      setLoadingtext(loadingTexts[randomIndex])
+      setLoadingText(loadingTexts[randomIndex])
     }, 5000)
     return () => clearInterval(interval)
   }, [])
 
+  // Also sets an interval
+  // Updates the progress state on an interval
+  // Increases progress towards 100% randomly
+  // Resets to 0 if finished or reaches 100
+  // Clears interval on unmount
   React.useEffect(() => {
     const interval = setInterval(() => {
       setProgress(prev => {
