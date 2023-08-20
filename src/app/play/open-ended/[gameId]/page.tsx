@@ -12,9 +12,8 @@ type Props = {
 
 const OpenEndedPage = async ({ params: {gameId } }: Props) => {
     const session = await getAuthSession()
-    if(!session?.user) {
-        return redirect('/')
-    }
+    if(!session?.user) return redirect('/')
+
     const game = await prisma.game.findUnique({
         where: {
             id: gameId

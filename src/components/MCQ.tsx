@@ -28,7 +28,12 @@ const MCQ = ({ game }: Props) => {
     const [now, setNow] = React.useState(new Date())
     const { toast }  = useToast()
 
-    const currentQuestion = React.useMemo(() => {
+    // This prevents re-calculating the current question on every render.
+    // Benefits:
+    // Avoids expensive recalculations on each render
+    // Caches the value until dependencies change
+    // Improves performance in components that select from data
+    const currentQuestion = React.useMemo(() => { // using the useMemo hook to memorize the current question object from an array of questions
         return game.questions[questionIndex]
     }, [questionIndex, game.questions])
 
@@ -58,7 +63,9 @@ const MCQ = ({ game }: Props) => {
         return () => { clearInterval(interval) }
     }, [hasEnded])
 
-    const handleNext = React.useCallback(() => {
+    // The key difference between useCallback and useMemo in React is:
+    // useCallback caches a function, while useMemo caches the result of a function.
+    const handleNext = React.useCallback(() => { // useCallback hook to memoize the handleNext function to avoid re-creating it on every render.
         if (isChecking) return;
 
         checkAnswer(undefined, {
@@ -148,12 +155,14 @@ const MCQ = ({ game }: Props) => {
             </div>
             <Card className="w-full mt-4">
                 <CardHeader className="flex flex-row items-center">
+                    {/* divide-y: Add borders between stacked elements */}
                     <CardTitle className="mr-4 text-center divide-y divide-zinc-600/50">
                         <div>{questionIndex + 1}</div>
                         <div className='text-base text-slate-400'>
                             {game.questions.length}
                         </div>
                     </CardTitle>
+                    {/* flex-grow: Use grow to allow a flex item to grow to fill any available space */}
                     <CardDescription className='flex-grow text-lg'>
                         {currentQuestion?.question}
                     </CardDescription>

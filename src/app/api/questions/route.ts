@@ -24,6 +24,8 @@ export const POST = async (req: Request, res: Response) => {
         if(type === 'open_ended') {
             questions = await strict_output(
                 'You are a helpful AI that is able to generate a pair of questions and answers, the length of the answer should not exceed 15 words, store all the pairs of answers and questions in a JSON array',
+                // new Array(length) - Creates an array with empty slots of the given length
+                // .fill() fills all the slots with a value, default is undefined
                 new Array(amount).fill(
                     `You are to generate a random hard open-ended question about ${topic}`
                 ),
