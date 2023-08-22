@@ -7,13 +7,10 @@ import { redirect } from 'next/navigation'
 import { prisma } from '@/lib/db'
 import { RollerCoaster } from 'lucide-react'
 
-type Props = {}
-
-const RecentActivities = async (props: Props) => {
+const RecentActivities = async () => {
     const session = await getAuthSession()
-    if(!session?.user) {
-        return redirect('/')
-    }
+    if(!session?.user) return redirect('/')
+
     const gameCount = await prisma.game.count({
         where: {
             userId: session.user.id
