@@ -8,7 +8,7 @@ type Props = {
   userId: string
 }
 
-const HistoryComponent = async ({limit, userId}: Props) => {
+const HistoryComponent = async ({ limit, userId }: Props) => {
   const games = await prisma.game.findMany({
     where: {
       userId
@@ -35,6 +35,7 @@ const HistoryComponent = async ({limit, userId}: Props) => {
                 </Link>
                 <p className='flex items-center px-2 py-1 text-sm text-white rounded-lg w-fit bg-slate-800'>
                   <Clock className='w-4 h-4 mr-1'/>
+                  {/* toLocaleDateString(): Converts a date to a string by using the current or specified locale */}
                   {new Date(game.timeStarted).toLocaleDateString()}
                 </p>
                 <p className='text-sm text-muted-foreground'>

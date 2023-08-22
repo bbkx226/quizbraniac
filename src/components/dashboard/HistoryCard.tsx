@@ -4,9 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/card'
 import { FolderClock } from 'lucide-react'
 import { useRouter } from 'next/navigation';
 
-type Props = {}
-
-const HistoryCard = (props: Props) => {
+const HistoryCard = () => {
     const router = useRouter()
   return (
     <Card className='hover:cursor-pointer hover:opacity-75' onClick={()=>router.push('/history')}>

@@ -8,10 +8,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { LucideLayoutDashboard } from "lucide-react";
 
 const HistoryPage = async () => {
-  const session = await getAuthSession()
-  if (!session?.user) {
-    return redirect('/')
-  }
+    const session = await getAuthSession()
+    if (!session?.user) return redirect('/')
+
   return (
     <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px]'>
       <Card>

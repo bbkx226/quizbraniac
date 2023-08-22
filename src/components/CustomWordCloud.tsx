@@ -8,7 +8,11 @@ type Props = {
   formattedTopics: { text: string, value: number }[]
 }
 
-const fontSizeMapper = (word: {value:number}) => {
+// This has the effect of mapping the word value to a font size in a logarithmic way.
+// Smaller values will map to smaller font sizes that grow slowly.
+// Larger values will map to larger font sizes that grow more rapidly.
+// The fontSizeMapper function returns this calculated font size.
+const fontSizeMapper = (word: { value:number }) => { // It takes in a single parameter called word, which is an object with a value property that is a number.
     return Math.log2(word.value) * 5 + 16
 }
 

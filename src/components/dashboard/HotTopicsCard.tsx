@@ -4,9 +4,7 @@ import { Flame } from 'lucide-react'
 import CustomWordCloud from '@/components/CustomWordCloud';
 import { prisma } from '@/lib/db';
 
-type Props = {}
-
-const HotTopicsCard = async (props: Props) => {
+const HotTopicsCard = async () => {
     const topics = await prisma.topic_count.findMany({})
     const formattedTopics = topics.map(topic => {
         return {
@@ -24,9 +22,7 @@ const HotTopicsCard = async (props: Props) => {
             <CardDescription>
                  Ignite Your Curiosity - Click on Any Topic to Blaze Through a Quiz!
             </CardDescription>
-            
         </CardHeader>
-
         <CardContent className="pl-2">
             <CustomWordCloud formattedTopics={formattedTopics}/>
         </CardContent>

@@ -17,17 +17,14 @@ type Props = {
 
 const Statistics = async ({ params: {gameId}}: Props) => {
   const session = await getAuthSession()
-  if(!session?.user) {
-    return redirect('/')
-  }
+  if(!session?.user) return redirect('/')
+
   const game = await prisma.game.findUnique({
     where: {id: gameId},
     include: {questions: true}
   })
   
-  if(!game){
-    return redirect('/')
-  }
+  if(!game) return redirect('/')
 
   let accuracy: number = 0
 
@@ -48,28 +45,27 @@ const Statistics = async ({ params: {gameId}}: Props) => {
   }
     return (
     <>
-        <div className='p-8 mx-auto max-w-7xl'>
-            <div className="flex items-center justify-between space-y-2">
-                <h2 className="text-3xl font-bold tracking-tight">Statistical Insights</h2>
-                <div className='flex items-center space-x-2'>
-                    <Link href='/dashboard' className={buttonVariants()}>
-                        <LucideLayoutDashboard className='mr-2'/>
-                        Dashboard
-                    </Link>
-                </div>
-            </div>
-            
-            <div className="grid gap-4 mt-4 md:grid-cols-7">
-                <ResultsCard accuracy={accuracy}/>
-                <AccuracyCard accuracy={accuracy}/> 
-                <TimeTakenCard 
-                  timeEnded={new Date()} 
-                  timeStarted={new Date(game.timeStarted ?? 0)}
-                />
-            </div>
-
-            <QuestionsList questions={game.questions}/>
+      <div className='p-8 mx-auto max-w-7xl'>
+        <div className="flex items-center justify-between space-y-2">
+          <h2 className="text-3xl font-bold tracking-tight">Statistical Insights</h2>
+          <div className='flex items-center space-x-2'>
+            <Link href='/dashboard' className={buttonVariants()}>
+              <LucideLayoutDashboard className='mr-2'/>
+              Dashboard
+            </Link>
+          </div>
         </div>
+          
+        <div className="grid gap-4 mt-4 md:grid-cols-7">
+          <ResultsCard accuracy={accuracy}/>
+          <AccuracyCard accuracy={accuracy}/> 
+          <TimeTakenCard 
+            timeEnded={new Date()} 
+            timeStarted={new Date(game.timeStarted ?? 0)}
+          />
+        </div>
+          <QuestionsList questions={game.questions}/>
+      </div>
     </>
   )
 }
