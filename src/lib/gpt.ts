@@ -20,7 +20,7 @@ export async function strict_output(
   output_value_only: boolean = false,
   model: string = "gpt-3.5-turbo",
   temperature: number = 1,
-  num_tries: number = 7,
+  num_tries: number = 10,
   verbose: boolean = false
 ): Promise<
   {
